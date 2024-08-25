@@ -37,7 +37,7 @@ class _ViewHomeState extends State<ViewHome> {
           future: _getNameFromPreferences(),
           builder: (context, snapshot) {
             final name = snapshot.data ?? 'User';
-            return Text('Hi $name', style: const TextStyle(fontSize: 16, color: Colors.white));
+            return Text('Selamat Datang, $name', style: const TextStyle(fontSize: 16, color: Colors.white));
           },
         ),
         backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah

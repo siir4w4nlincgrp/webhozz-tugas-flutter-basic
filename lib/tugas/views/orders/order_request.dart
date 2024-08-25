@@ -37,7 +37,7 @@ class _OrderRequestState extends State<OrderRequest> {
             return ConstrainedBox(
               constraints: BoxConstraints(maxWidth: constraints.maxWidth),
               child: Text(
-                "Selamat Datang, $name!",
+                "Mau Pesan Kemana $name ?",
                 style: const TextStyle(
                   fontSize: 18, 
                   fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _OrderRequestState extends State<OrderRequest> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  "Tujuan perjalanan Anda",
+                  "Masukan Rute Perjalanan Anda",
                   style: TextStyle(
                     fontSize: 18, 
                     fontWeight: FontWeight.bold,

@@ -96,7 +96,7 @@ class _OrderSearchDestinationState extends State<OrderSearchDestination> {
           ),
         ),
         title: Text(
-          "Cari Lokasi Tujuan",
+          "Cari Lokasi Jemput dan Tujuan",
           style: const TextStyle(fontSize: 16),
         ),
         leading: IconButton(
