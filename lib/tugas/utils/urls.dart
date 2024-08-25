@@ -1,0 +1,1 @@
+const baseURL = 'https://laundryapi.chairuldev.my.id/';
