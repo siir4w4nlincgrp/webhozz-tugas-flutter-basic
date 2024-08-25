@@ -57,7 +57,7 @@ class _TugasWalkthroughState extends State<TugasWalkthrough> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          Colors.red[800], // Mengubah warna latar belakang menjadi merah tua
+          Color(0xFFB71C1C), // Mengubah warna latar belakang menjadi merah tua
       body: SafeArea(
         child: Center(
           child: PageView.builder(

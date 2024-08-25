@@ -35,20 +35,24 @@ class FragProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<Map<String, String>>(
-        future: _loadProfileData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final profileData = snapshot.data!;
-            return _buildProfileContent(context, profileData);
-          } else {
-            return const Center(child: Text('No data available'));
-          }
-        },
+      backgroundColor: kBackgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.all(kPadding),
+        child: FutureBuilder<Map<String, String>>(
+          future: _loadProfileData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (snapshot.hasData) {
+              final profileData = snapshot.data!;
+              return _buildProfileContent(context, profileData);
+            } else {
+              return const Center(child: Text('No data available'));
+            }
+          },
+        ),
       ),
     );
   }
@@ -57,64 +61,55 @@ class FragProfile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Divider with text "Profile Info"
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kPadding),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: const Text(
-                  'Profile Info',
-                  style: TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: kFontSize + 2,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const Divider(
+        // Profile Info Header
+        Column(
+          children: [
+            const Text(
+              'Profile Info',
+              style: TextStyle(
                 color: kPrimaryColor,
-                thickness: 2,
+                fontSize: kFontSize + 2,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: kPadding / 2),
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.grey.shade300,
+              child: Icon(
+                Icons.person,
+                color: kPrimaryColor,
+                size: 50,
+              ),
+            ),
+          ],
         ),
-        // Profile Details Box Shadow
+        const SizedBox(height: kPadding),
+        // Profile Details Card
         Container(
-          margin: const EdgeInsets.all(kPadding),
           padding: const EdgeInsets.all(kPadding),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(kBorderRadius),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: const Offset(0, 5), // Larger shadow below
-              ),
-            ],
+            border: Border.all(color: Colors.transparent),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildReadOnlyInput('Name', profileData['name']!),
-              const SizedBox(height: kPadding / 2), // Reduced space between shadows
+              const SizedBox(height: kPadding / 2), // Reduced space between fields
               _buildReadOnlyInput('Email', profileData['email']!),
-              const SizedBox(height: kPadding),
-              ElevatedButton(
-                onPressed: () => _logout(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kPrimaryColor,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(kBorderRadius),
-                  ),
-                ),
-                child: const Text('Logout'),
-              ),
             ],
+          ),
+        ),
+        const SizedBox(height: kPadding),
+        // Logout Button
+        IconButton(
+          onPressed: () => _logout(context),
+          icon: const Icon(
+            Icons.logout,
+            color: kPrimaryColor,
+            size: 30,
           ),
         ),
       ],
@@ -122,28 +117,31 @@ class FragProfile extends StatelessWidget {
   }
 
   Widget _buildReadOnlyInput(String label, String value) {
-    return TextFormField(
-      initialValue: value,
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: const TextStyle(
-          color: kPrimaryColor,
-          fontSize: kFontSize,
-          fontWeight: FontWeight.w600,
+    return Container(
+      margin: const EdgeInsets.only(bottom: kPadding / 2),
+      child: TextFormField(
+        initialValue: value,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(
+            color: kPrimaryColor,
+            fontSize: kFontSize,
+            fontWeight: FontWeight.w600,
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(kBorderRadius),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(kBorderRadius),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         ),
-        filled: true,
-        fillColor: kBackgroundColor,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: kPrimaryColor, width: 1.5),
-          borderRadius: BorderRadius.circular(kBorderRadius),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: kPrimaryColor, width: 1.5),
-          borderRadius: BorderRadius.circular(kBorderRadius),
-        ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        enabled: false,
       ),
-      enabled: false,
     );
   }
 }

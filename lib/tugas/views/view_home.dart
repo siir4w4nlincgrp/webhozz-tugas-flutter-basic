@@ -37,17 +37,28 @@ class _ViewHomeState extends State<ViewHome> {
           future: _getNameFromPreferences(),
           builder: (context, snapshot) {
             final name = snapshot.data ?? 'User';
-            return Text('Hi $name', style: const TextStyle(fontSize: 16, color: Colors.white),);
+            return Text('Hi $name', style: const TextStyle(fontSize: 16, color: Colors.white));
           },
         ),
-        backgroundColor: const Color(0xFFB71C1C),
+        backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah
+        elevation: 4,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
         child: _pages[currentIndex],
       ),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 10,
-        elevation: 0,
+        elevation: 8,
         shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -67,9 +78,9 @@ class _ViewHomeState extends State<ViewHome> {
         onPressed: () {
           // Action for the Floating Action Button
         },
-        backgroundColor: const Color(0xFFB71C1C),
+        backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah
         child: const Icon(
-          Icons.camera_alt_outlined,
+          Icons.camera_alt_outlined, // Tidak merubah ikon
           color: Colors.white,
           size: 35,
         ),

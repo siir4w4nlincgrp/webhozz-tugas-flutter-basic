@@ -66,7 +66,7 @@ class _ViewLoginState extends State<ViewLogin> {
             "Error",
             responseData["message"] ?? "Terjadi kesalahan",
             snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
+            backgroundColor: Color(0xFFB71C1C),
             colorText: Colors.white,
             margin: const EdgeInsets.all(15),
             borderRadius: 8,
@@ -79,7 +79,7 @@ class _ViewLoginState extends State<ViewLogin> {
           "Error",
           e.response?.data["message"] ?? "Terjadi kesalahan. Silakan coba lagi.",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFFB71C1C),
           colorText: Colors.white,
           margin: const EdgeInsets.all(15),
           borderRadius: 8,
@@ -91,7 +91,7 @@ class _ViewLoginState extends State<ViewLogin> {
           "Error",
           "Terjadi kesalahan sistem. Silakan coba lagi.",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFFB71C1C),
           colorText: Colors.white,
           margin: const EdgeInsets.all(15),
           borderRadius: 8,
@@ -124,7 +124,13 @@ class _ViewLoginState extends State<ViewLogin> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const SizedBox(height: 100),
+              // Menambahkan gambar stiker login di atas form
+              Image.asset(
+                'assets/images/login.png',
+                height: 300,  // Sesuaikan dengan ukuran gambar yang diinginkan
+                width: 300,   // Sesuaikan dengan ukuran gambar yang diinginkan
+              ),
+              const SizedBox(height: 30),
               const Center(
                 child: Text(
                   "LOGIN",
@@ -143,12 +149,12 @@ class _ViewLoginState extends State<ViewLogin> {
                     TextFormField(
                       controller: emailController,
                       decoration: myDecoration(
-                        "Email / No Hp",
+                        "Email",
                         const Icon(Icons.person),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Harap isi email atau nomor hp";
+                          return "Harap isi email";
                         } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$").hasMatch(value)) {
                           return "Format email tidak valid";
                         }
@@ -192,7 +198,7 @@ class _ViewLoginState extends State<ViewLogin> {
                         child: ElevatedButton(
                           onPressed: processLogin,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Color(0xFFB71C1C),
                             foregroundColor: Colors.white,
                           ),
                           child: const Text("Login"),
@@ -219,7 +225,7 @@ class _ViewLoginState extends State<ViewLogin> {
               child: const Text(
                 "Daftar",
                 style: TextStyle(
-                  color: Colors.red,
+                  color: Color(0xFFB71C1C),
                 ),
               ),
             ),

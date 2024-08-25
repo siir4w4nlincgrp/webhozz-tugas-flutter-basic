@@ -13,7 +13,7 @@ class _FragHomeState extends State<FragHome> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,18 +25,22 @@ class _FragHomeState extends State<FragHome> {
               children: [
                 const Text(
                   "Main Menu",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.play_arrow),
+                  color: Color(0xFFB71C1C), // Keeping the same red color for consistency
                 ),
               ],
             ),
           ),
           // Horizontal List View
           SizedBox(
-            height: 100,
+            height: 120, // Increased height for better visibility
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -44,7 +48,7 @@ class _FragHomeState extends State<FragHome> {
               itemBuilder: (ctx, index) {
                 ModelMainMenu data = tugasMainMenu()[index];
                 return Padding(
-                  padding: const EdgeInsets.only(right: 16.0), // Space between items
+                  padding: const EdgeInsets.only(right: 20.0), // Increased space between items
                   child: GestureDetector(
                     onTap: () {
                       Get.toNamed(data.routeName!);
@@ -53,23 +57,34 @@ class _FragHomeState extends State<FragHome> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 60,
-                          height: 60,
+                          width: 80, // Increased width for better visibility
+                          height: 80, // Increased height for better visibility
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3), // Changes the shadow direction
+                              ),
+                            ],
                           ),
                           child: Icon(
                             data.icon,
                             color: data.color,
-                            size: 34,
+                            size: 40, // Increased size for better visibility
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12), // Increased space between icon and text
                         Text(
                           data.tittle!,
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(
+                            fontSize: 16, // Adjusted font size for better readability
+                            fontWeight: FontWeight.w500, // Added weight for emphasis
+                          ),
                         ),
                       ],
                     ),

@@ -63,7 +63,7 @@ class _ViewRegisterState extends State<ViewRegister> {
           "Error",
           e.response?.data["message"] ?? "Terjadi kesalahan. Silakan coba lagi.",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFFB71C1C),
           colorText: Colors.white,
           margin: const EdgeInsets.all(15),
           borderRadius: 8,
@@ -75,7 +75,7 @@ class _ViewRegisterState extends State<ViewRegister> {
           "Error",
           "Terjadi kesalahan sistem. Silakan coba lagi.",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFFB71C1C),
           colorText: Colors.white,
           margin: const EdgeInsets.all(15),
           borderRadius: 8,
@@ -110,12 +110,29 @@ class _ViewRegisterState extends State<ViewRegister> {
             Get.off(() => const ViewLogin());
           },
         ),
+        backgroundColor: const Color(0xFFB71C1C),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
+              // Menambahkan ikon stiker di bagian atas
+              Image.asset(
+                'assets/images/register.png',
+                width: 100, // Ukuran yang diinginkan
+                height: 100, // Ukuran yang diinginkan
+              ),
+              const SizedBox(height: 20), // Memberikan jarak antara ikon dan teks
               const Center(
                 child: Text(
                   "REGISTER",
@@ -238,7 +255,7 @@ class _ViewRegisterState extends State<ViewRegister> {
                         child: ElevatedButton(
                           onPressed: processRegister,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Color(0xFFB71C1C),
                             foregroundColor: Colors.white,
                           ),
                           child: const Text("Register"),
@@ -265,7 +282,7 @@ class _ViewRegisterState extends State<ViewRegister> {
               child: const Text(
                 "Login",
                 style: TextStyle(
-                  color: Colors.red,
+                  color: Color(0xFFB71C1C),
                 ),
               ),
             ),

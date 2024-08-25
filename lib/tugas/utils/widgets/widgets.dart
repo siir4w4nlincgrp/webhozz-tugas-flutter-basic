@@ -15,11 +15,11 @@ InputDecoration myDecoration(String hint, Icon icon, {IconButton? suffix}) {
     ),
     errorBorder: const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(20)),
-      borderSide: BorderSide(color: Colors.red), // Border merah untuk state error
+      borderSide: BorderSide(color: Color(0xFFB71C1C)), // Border merah untuk state error
     ),
     focusedErrorBorder: const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(20)),
-      borderSide: BorderSide(color: Colors.red), // Border merah untuk state focused error
+      borderSide: BorderSide(color: Color(0xFFB71C1C)), // Border merah untuk state focused error
     ),
     prefixIcon: icon,
     suffixIcon: suffix,

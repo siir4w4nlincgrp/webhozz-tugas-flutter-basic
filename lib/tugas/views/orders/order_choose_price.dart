@@ -30,15 +30,13 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
 
   void _zoomToLocations() async {
     setState(() {
-      isLoading = true; // Menandai bahwa peta sedang di-update
+      isLoading = true;
     });
 
-    // Simulasikan klik ganda
     for (int i = 0; i < 2; i++) {
-      // Menyebabkan sedikit gerakan peta untuk memperbarui tampilan
       mapController.move(mapController.center, mapController.zoom + 0.001);
 
-      await Future.delayed(const Duration(milliseconds: 50)); // Delay untuk animasi
+      await Future.delayed(const Duration(milliseconds: 50));
 
       final bounds = LatLngBounds.fromPoints([
         pickupLocation,
@@ -49,12 +47,11 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
         options: FitBoundsOptions(padding: EdgeInsets.all(16)),
       );
 
-      // Tambahkan delay sebelum klik berikutnya
       await Future.delayed(const Duration(milliseconds: 50));
     }
 
     setState(() {
-      isLoading = false; // Menghentikan indikator loading setelah update selesai
+      isLoading = false;
     });
   }
 
@@ -65,7 +62,6 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
         children: [
           Column(
             children: [
-              // Bagian untuk Map
               Expanded(
                 flex: 2,
                 child: Stack(
@@ -86,7 +82,7 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                           markers: [
                             Marker(
                               point: pickupLocation,
-                              builder: (context) => const Icon(Icons.pin_drop, color: Colors.red, size: 40),
+                              builder: (context) => const Icon(Icons.pin_drop, color: Color(0xFFB71C1C), size: 40),
                             ),
                             Marker(
                               point: destinationLocation,
@@ -102,9 +98,17 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                       right: 16,
                       child: Container(
                         padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: RichText(
                           textAlign: TextAlign.center,
@@ -133,7 +137,6 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                   ],
                 ),
               ),
-              // Bagian untuk konten Pilihan Harga
               Expanded(
                 flex: 1,
                 child: Container(
@@ -143,7 +146,14 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
-                    border: Border.all(),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, -3),
+                      ),
+                    ],
                   ),
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -173,13 +183,14 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
                                           color: controller.rides.id == data.id
-                                              ? Colors.red.withAlpha(30)
+                                              ? Color(0xFFB71C1C).withAlpha(30)
                                               : Colors.white,
                                           border: Border.all(
                                             color: controller.rides.id == data.id
-                                                ? Colors.red.withAlpha(30)
-                                                : Colors.white,
+                                                ? Colors.transparent
+                                                : Colors.transparent,
                                           ),
+                                          borderRadius: BorderRadius.circular(8),
                                         ),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,13 +198,13 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                                             Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text(data.title),
-                                                Text(data.subTitle),
+                                                Text(data.title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                                Text(data.subTitle, style: TextStyle(color: Colors.grey)),
                                                 const SizedBox(height: 16),
                                                 Row(
                                                   mainAxisSize: MainAxisSize.min,
                                                   children: [
-                                                    Text(data.cost),
+                                                    Text(data.cost, style: TextStyle(color: Colors.black)),
                                                     const SizedBox(width: 20),
                                                     RichText(
                                                       textAlign: TextAlign.center,
@@ -203,7 +214,7 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                                                           const WidgetSpan(
                                                             child: Padding(
                                                               padding: EdgeInsets.symmetric(horizontal: 2.0),
-                                                              child: Icon(Icons.access_time_outlined),
+                                                              child: Icon(Icons.access_time_outlined, size: 16),
                                                             ),
                                                           ),
                                                           TextSpan(text: data.time),
@@ -237,7 +248,6 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
               ),
             ],
           ),
-          // Indikator loading
           if (isLoading)
             Center(
               child: CircularProgressIndicator(),
@@ -278,38 +288,26 @@ class _OrderChoosePriceState extends State<OrderChoosePrice> {
                       ),
                     );
                   } else {
-                    // Handle jika ID tidak valid
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Mobil yang dipilih tidak valid.')),
                     );
                   }
                 },
-                color: Colors.red,
+                height: 45,
+                color: Color(0xFFB71C1C),
                 child: const Text(
-                  'Pesan',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+                  'Buat Pesanan',
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-            ),
-            const SizedBox(width: 10),
-            MaterialButton(
-              padding: const EdgeInsets.all(8),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-              onPressed: _zoomToLocations,
-              color: Colors.blue,
-              child: const Icon(
-                Icons.center_focus_strong,
-                color: Colors.white,
-                size: 24,
               ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _zoomToLocations,
+        backgroundColor: Color(0xFFB71C1C),
+        child: const Icon(Icons.zoom_in_map, color: Colors.white),
       ),
     );
   }

@@ -95,13 +95,22 @@ class _OrderSearchFromMapState extends State<OrderSearchFromMap> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         leading: IconButton(
           onPressed: () => Get.back(),
           icon: const Icon(Icons.chevron_left, color: Colors.black),
         ),
         centerTitle: true,
-        title: const Text("Pilih Tujuan", style: TextStyle(color: Colors.black)),
+        title: const Text("Pilih Tujuan", style: TextStyle(color: Colors.white)),
       ),
       body: Stack(
         children: [
@@ -135,7 +144,7 @@ class _OrderSearchFromMapState extends State<OrderSearchFromMap> {
                       point: _selectedLocation!,
                       builder: (ctx) => const Icon(
                         Icons.pin_drop,
-                        color: Colors.red,
+                        color: Color(0xFFB71C1C),
                         size: 40,
                       ),
                     ),
@@ -184,9 +193,9 @@ class _OrderSearchFromMapState extends State<OrderSearchFromMap> {
                       );
                     }
                   },
-                  color: Colors.red,
+                  color: Color(0xFFB71C1C),
                   child: const Text(
-                    "Pilih Tujuan",
+                    "Konfirmasi",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),

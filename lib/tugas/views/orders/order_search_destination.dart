@@ -83,12 +83,25 @@ class _OrderSearchDestinationState extends State<OrderSearchDestination> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F5F5), // Background color
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          "Cari Lokasi Tujuan",
+          style: const TextStyle(fontSize: 16),
+        ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: const Icon(Icons.close, color: Colors.black),
+          icon: const Icon(Icons.close, color: Colors.white),
         ),
       ),
       body: Padding(
@@ -100,18 +113,21 @@ class _OrderSearchDestinationState extends State<OrderSearchDestination> {
               controller: _pickupController,
               readOnly: true, // Membuat input menjadi read-only
               decoration: InputDecoration(
-                labelText: "Masukan lokasi jemput",
-                border: const OutlineInputBorder(),
-                prefixIcon: const Icon(Icons.location_on),
+                labelText: "Lokasi Jemput",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: const Color(0xFFB71C1C)),
+                ),
+                prefixIcon: const Icon(Icons.location_on, color: Color(0xFFB71C1C)),
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.map),
+                      icon: const Icon(Icons.map, color: Color(0xFFB71C1C)),
                       onPressed: () => _navigateToMap('pickup'),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.copy),
+                      icon: const Icon(Icons.copy, color: Color(0xFFB71C1C)),
                       onPressed: () => _copyToClipboard(_pickupController.text),
                     ),
                   ],
@@ -123,18 +139,21 @@ class _OrderSearchDestinationState extends State<OrderSearchDestination> {
               controller: _destinationController,
               readOnly: true, // Membuat input menjadi read-only
               decoration: InputDecoration(
-                labelText: "Masukan lokasi tujuan",
-                border: const OutlineInputBorder(),
-                prefixIcon: const Icon(Icons.location_on),
+                labelText: "Lokasi Tujuan",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: const Color(0xFFB71C1C)),
+                ),
+                prefixIcon: const Icon(Icons.location_on, color: Color(0xFFB71C1C)),
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.map),
+                      icon: const Icon(Icons.map, color: Color(0xFFB71C1C)),
                       onPressed: () => _navigateToMap('destination'),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.copy),
+                      icon: const Icon(Icons.copy, color: Color(0xFFB71C1C)),
                       onPressed: () => _copyToClipboard(_destinationController.text),
                     ),
                   ],
@@ -145,7 +164,11 @@ class _OrderSearchDestinationState extends State<OrderSearchDestination> {
             ElevatedButton(
               onPressed: _navigateToOrderChoosePrice,
               style: ElevatedButton.styleFrom(
+                primary: const Color(0xFFB71C1C), // Button color
                 minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
               child: const Text("Selanjutnya"),
             ),

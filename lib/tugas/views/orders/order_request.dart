@@ -37,21 +37,35 @@ class _OrderRequestState extends State<OrderRequest> {
             return ConstrainedBox(
               constraints: BoxConstraints(maxWidth: constraints.maxWidth),
               child: Text(
-                "Mau ke mana, $name ?",
-                style: const TextStyle(fontSize: 16), // Menyesuaikan ukuran font
-                overflow: TextOverflow.visible // Menambahkan overflow
+                "Selamat Datang, $name!",
+                style: const TextStyle(
+                  fontSize: 18, 
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.visible,
               ),
             );
           },
         ),
+        backgroundColor: const Color(0xFFB71C1C), // Menjaga warna merah
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        elevation: 0,
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           FlutterMap(
             options: MapOptions(
-              center : LatLng(-6.200000, 106.816666),
-              zoom : 9.2,
+              center: LatLng(-6.200000, 106.816666),
+              zoom: 9.2,
             ),
             children: [
               TileLayer(
@@ -68,23 +82,38 @@ class _OrderRequestState extends State<OrderRequest> {
             ],
           ),
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, -2),
+                ),
+              ],
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Halo, Mau Pesan Ke Tujuan Mana ?"),
-                const SizedBox(height: 20),
+                const Text(
+                  "Tujuan perjalanan Anda",
+                  style: TextStyle(
+                    fontSize: 18, 
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
                 TextField(
                   onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
                     Get.toNamed("/search-destination");
                   },
                   decoration: myDecoration(
-                    "Cari lokasi tujuan", const Icon(Icons.search),
+                    "Cari lokasi tujuan", 
+                    const Icon(Icons.search, color: Color(0xFFB71C1C)),
                   ),
                 ),
               ],

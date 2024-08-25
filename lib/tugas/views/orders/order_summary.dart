@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:linc_driver/tugas/models/model_ride.dart';
+import 'package:get/get.dart'; // Untuk navigasi dengan GetX
 
 class OrderSummary extends StatelessWidget {
   final LatLng pickupLocation;
@@ -19,6 +20,16 @@ class OrderSummary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Informasi Pesanan'),
+        backgroundColor: const Color(0xFFB71C1C),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,36 +41,32 @@ class OrderSummary extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Lokasi Jemput: ${pickupLocation.latitude}, ${pickupLocation.longitude}',
-              style: const TextStyle(fontSize: 18),
+            _buildReadOnlyFormField(
+              label: 'Lokasi Jemput',
+              value: '${pickupLocation.latitude}, ${pickupLocation.longitude}',
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Lokasi Tujuan: ${destinationLocation.latitude}, ${destinationLocation.longitude}',
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 16), // Jarak lebih besar antara elemen
+            _buildReadOnlyFormField(
+              label: 'Lokasi Tujuan',
+              value: '${destinationLocation.latitude}, ${destinationLocation.longitude}',
             ),
             const SizedBox(height: 16),
-            Text(
-              'Mobil yang Dipilih:',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            _buildReadOnlyFormField(
+              label: 'Mobil yang Dipilih',
+              value: selectedRide.title,
             ),
-            const SizedBox(height: 8),
-            Text(
-              selectedRide.title,
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 16),
+            _buildReadOnlyFormField(
+              label: 'Jumlah Penumpang',
+              value: selectedRide.subTitle,
             ),
-            Text(
-              selectedRide.subTitle,
-              style: const TextStyle(fontSize: 18),
+            _buildReadOnlyFormField(
+              label: 'Biaya',
+              value: selectedRide.cost,
             ),
-            Text(
-              selectedRide.cost,
-              style: const TextStyle(fontSize: 18),
-            ),
-            Text(
-              'Waktu: ${selectedRide.time}',
-              style: const TextStyle(fontSize: 18),
+            _buildReadOnlyFormField(
+              label: 'Estimasi Waktu Jemput',
+              value: selectedRide.time,
             ),
             const SizedBox(height: 16),
             Image.asset(
@@ -71,6 +78,44 @@ class OrderSummary extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ElevatedButton(
+            onPressed: () {
+              Get.toNamed('home'); // Navigasi ke halaman ViewHome
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xFFB71C1C), // Warna tombol merah
+              minimumSize: Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+            ),
+            child: const Text(
+              'Back to Home',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildReadOnlyFormField({
+    required String label,
+    required String value,
+  }) {
+    return TextFormField(
+      readOnly: true,
+      initialValue: value,
+      decoration: InputDecoration(
+        labelText: label,
+        border: InputBorder.none, // Menghilangkan outline
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      style: const TextStyle(fontSize: 18),
     );
   }
 }

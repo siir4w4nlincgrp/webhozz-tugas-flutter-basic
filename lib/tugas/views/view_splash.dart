@@ -120,7 +120,7 @@ class _TugasSplashState extends State<TugasSplash> {
                         fontSize: 48.0, // Adjust size as needed
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
-                        color: Colors.redAccent.shade700, // Text color
+                        color: Color(0xFFB71C1C), // Text color
                         shadows: [
                           Shadow(
                             offset: const Offset(0, 2),

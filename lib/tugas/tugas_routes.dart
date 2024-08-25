@@ -5,6 +5,7 @@ import 'package:linc_driver/tugas/views/orders/order_search_destination.dart';
 import 'package:linc_driver/tugas/views/orders/order_search_from_map.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:linc_driver/tugas/views/view_home.dart';
 
 List<GetPage<dynamic>> routes = [
 
@@ -13,5 +14,6 @@ List<GetPage<dynamic>> routes = [
   GetPage(name: "/search-destination", page: () => const OrderSearchDestination()),
   GetPage(name: "/search-from-map", page: () => const OrderSearchFromMap()),
   GetPage(name: "/order-choose-price", page: () => const OrderChoosePrice()),
+  GetPage(name: "/home", page: () => const ViewHome()),
 
 ];
