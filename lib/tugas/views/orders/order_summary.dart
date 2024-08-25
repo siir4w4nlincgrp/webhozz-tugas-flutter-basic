@@ -37,7 +37,7 @@ class OrderSummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Informasi Pesanan',
+              'Pesanan ID 4743638232632',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -83,7 +83,7 @@ class OrderSummary extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: ElevatedButton(
             onPressed: () {
-              Get.toNamed('home'); // Navigasi ke halaman ViewHome
+              Get.offAllNamed('home'); // Navigasi ke halaman home dan hapus semua halaman sebelumnya
             },
             style: ElevatedButton.styleFrom(
               primary: Color(0xFFB71C1C), // Warna tombol merah
